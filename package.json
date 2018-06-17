@@ -1,0 +1,16 @@
+{
+  "name": "bostadskarta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Jesper Orb <jesperorb@gmail.com> (https://jesperorb.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.16.3",
+    "node-schedule": "1.3.0",
+    "puppeteer": "1.5.0"
+  }
+}
