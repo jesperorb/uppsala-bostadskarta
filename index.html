@@ -14,12 +14,18 @@
 </head>
 
 <body>
-  <button id="toggle" class="toggle">List</button>
-  <select id="filter" class="filter">
-    <option value="1">1</option>
-    <option value="2" selected>2</option>
-    <option value="3">3</option>
-  </select>
+  <div class="toolbar">
+    <button id="toggle" class="toggle">List</button>
+    <div class="filter">
+      <label for="filter">Rum:</label>
+      <select id="filter">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+  </div>
   <div id="map" class="map"></div>
   <div id="list" class="list hide"></div>
   <script src="https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js"></script>

@@ -43,13 +43,15 @@ function renderList(data) {
   const html = data
     .reduce((acc, r) => acc += `
       <div class="list__item">
-        <h2><a href="https://bostad.uppsala.se/lediga-bostader/bostad/?id=${
-          r.rentalObjectId
-        }">${r.address}</a></h2>
-        <p><em>${r.location}</em></p>
-        <p>Hyra: <strong>${r.rent}</strong></p>
-        <p>Rum: <strong>${r.rooms}</strong></p>
-        <p>Sökande: <strong>${r.applications}</strong></p>
+        <img class="image" src="https://bostad.uppsala.se/${r.image}"/>
+        <div class="details">
+          <h2><a href="https://bostad.uppsala.se/lediga-bostader/bostad/?id=${
+            r.rentalObjectId
+          }">${r.address}</a></h2>
+          <p>Hyra: <strong>${r.rent}</strong></p>
+          <p>Rum: <strong>${r.rooms}</strong></p>
+          <p>Sökande: <strong>${r.applications}</strong></p>
+        </div>
       </div>`, "");
   ui.list.innerHTML = html;
 }

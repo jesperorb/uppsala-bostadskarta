@@ -3,15 +3,15 @@ mapboxgl.accessToken = "";
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/light-v9",
-  zoom: 13,
-  pitch: 60,
+  zoom: 12,
+  pitch: 50,
   bearing: -10,
   center: [17.639312, 59.858694]
 }).addControl(new mapboxgl.NavigationControl());
 
 const popup = new mapboxgl.Popup({
   closeButton: true,
-  closeOnClick: false
+  closeOnClick: false,
 });
 
 const setCursor = cursor => (map.getCanvas().style.cursor = cursor);
@@ -40,6 +40,7 @@ const formatPopup = properties => {
   </div >
   <p>Sökande: <strong>${properties.applications}</strong></p>
   <p>Rum: <strong>${properties.rooms}</strong> </p>
+  <img src="https://bostad.uppsala.se/${properties.image}" height="100" width="100" />
   `;
 };
 
@@ -73,7 +74,7 @@ map.on("load", () => {
     ]);
 });
 
-map.on("click", "apartments-mapping", e => {
+map.on("mouseenter", "apartments-mapping", (e) => {
   setCursor("pointer");
   const [ selected ] = e.features;
   const { geometry: { coordinates }, properties } = selected;
@@ -86,10 +87,6 @@ map.on("click", "apartments-mapping", e => {
     .setLngLat(coordinates)
     .setHTML(html)
     .addTo(map);
-});
-
-map.on("mouseenter", "apartments-mapping", () => {
-  setCursor("pointer");
 });
 
 map.on("mouseleave", "apartments-mapping", () => {
