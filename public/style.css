@@ -24,10 +24,17 @@ body {
 
 .list__item {
   display: flex;
+  flex-direction: column;
   margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 0 12px 0 rgba(0,0,0,.15);
+}
+
+@media (min-width: 690px) {
+  .list__item {
+    flex-direction: row;
+  }
 }
 
 .details {
@@ -52,7 +59,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 13rem;
+  width: 20rem;
   height: 2rem;
 }
 
@@ -62,7 +69,6 @@ body {
   background-color: #fff;
   color: rgba(51,51,51, 1);
   padding: .5rem 1rem;
-  width: 4rem;
   font-weight: bold;
   font-size: 1em;
 }
@@ -91,7 +97,6 @@ body {
 
 .mapboxgl-popup-content .info {
   display: flex;
-  font-size: 1.5em;
 }
 
 .mapboxgl-popup-content a {

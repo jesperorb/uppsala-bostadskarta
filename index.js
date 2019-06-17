@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const schedule = require('node-schedule');
 const app = express();
+let lastUpdated = null;
 
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
@@ -12,8 +13,11 @@ app.get('/', (req,res) => {
 });
 
 app.get('/refresh', async (req, res) => {
-  await scrapeUppsalaBostad();
-  res.send("OK");
+  if ((lastUpdated + 1800) > new Date().getTime()){
+    await scrapeUppsalaBostad();
+    return res.send("Refreshed");
+  }
+  return res.send("30 mins between every refresh");
 });
 
 app.listen(5000, () => console.log('listening on port 5000'));
@@ -33,6 +37,7 @@ async function scrapeUppsalaBostad(){
 
     fs.writeFileSync('public/formatted.geojson', JSON.stringify(featureCollection), 'utf-8');
     fs.writeFileSync('public/raw.json', JSON.stringify(rawData), 'utf-8');
+    lastUpdated = new Date().getTime();
     await browser.close();
   } catch(error){
     console.log(error);
@@ -54,7 +59,6 @@ function formatProperties(rentalObject) {
     rentalObjectId: rentalObject.rentalObjectId,
     typeOfRental: rentalObject.boendetyp.trim(),
     region: rentalObject.region.trim(),
-    location: rentalObject.location.trim()
   }
 }
 

@@ -2,7 +2,8 @@ const ui = {
   toggle: document.getElementById("toggle"),
   list: document.getElementById("list"),
   map: document.getElementById("map"),
-  filter: document.getElementById("filter")
+  filter: document.getElementById("filter"),
+  refresh: document.getElementById("refresh")
 };
 
 const state = {
@@ -37,6 +38,18 @@ function bindEvents() {
     state.filteredRentals = filtered;
     renderList(filtered);
   });
+
+  ui.refresh.addEventListener("click", async () => {
+      try {
+        ui.refresh.innerText = "Loading";
+        const response = await fetch("/refresh");
+        const text = await response.text();
+        ui.refresh.innerText = "Refresh";
+        console.log(text);
+      } catch({ message }) {
+        console.log(message);
+      }
+  })
 }
 
 function renderList(data) {

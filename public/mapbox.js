@@ -11,7 +11,7 @@ const map = new mapboxgl.Map({
 
 const popup = new mapboxgl.Popup({
   closeButton: true,
-  closeOnClick: false,
+  closeOnClick: true,
 });
 
 const setCursor = cursor => (map.getCanvas().style.cursor = cursor);
@@ -75,6 +75,21 @@ map.on("load", () => {
 });
 
 map.on("mouseenter", "apartments-mapping", (e) => {
+  setCursor("pointer");
+  const [ selected ] = e.features;
+  const { geometry: { coordinates }, properties } = selected;
+  properties.rent = formatRent(properties.rent);
+  const html = formatPopup(properties);
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+  popup
+    .setLngLat(coordinates)
+    .setHTML(html)
+    .addTo(map);
+});
+
+map.on("touchstart", "apartments-mapping", (e) => {
   setCursor("pointer");
   const [ selected ] = e.features;
   const { geometry: { coordinates }, properties } = selected;
