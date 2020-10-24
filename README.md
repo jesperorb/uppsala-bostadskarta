@@ -1,5 +1,9 @@
 # Uppsala Bostadsförmedling Lediga Lägenheter
 
-> Scrapes https://bostad.uppsala.se/ every day and displays the result on a map using https://www.mapbox.com/
+* Scrapes [Uppsala Bostadsförmedling](https://bostad.uppsala.se/)
+* Displays the result on a map using [Mapbox](https://www.mapbox.com/)
+  * Displays number of applicants
+  * Bigger circle means more area
+  * Deeper red means higher price per area
 
 ![Karta](https://i.imgur.com/ga44f7F.png)
