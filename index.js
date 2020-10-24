@@ -107,11 +107,3 @@ async function processHTML(rentalObjects) {
   }
   return rentalData;
 }
-
-async function scrapeBlocket(){
-  const url = "https://www.blocket.se/bostad/uthyres/uppsala?sort=&ss=&se=&ros=1&roe=3&bs=&be=&mre=8000&q=&q=&q=&is=1&save_search=1&l=0&md=th&f=p&f=c&f=b&m=113";
-  const page = await browser.newPage();
-  await page.goto(url);
-  await page.waitForSelector('#item_list');
-  const rentalObjects = await page.$$('.item_row');
-}
